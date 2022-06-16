@@ -1,10 +1,12 @@
 import React from 'react';
 import { createRoot } from 'react-dom/client';
 import { Provider } from 'react-redux';
-import { store } from './app/store';
-import App from './App';
+import { store } from './app/store/store';
 import reportWebVitals from './reportWebVitals';
-import './index.css';
+import { ThemeProvider } from '@mui/material';
+import { theme } from './constants/theme';
+import { AppRouter } from './pages/AppRouter';
+import { BrowserRouter } from 'react-router-dom';
 
 const container = document.getElementById('root')!;
 const root = createRoot(container);
@@ -12,7 +14,11 @@ const root = createRoot(container);
 root.render(
   <React.StrictMode>
     <Provider store={store}>
-      <App />
+      <ThemeProvider theme={theme}>
+        <BrowserRouter>
+          <AppRouter />
+        </BrowserRouter>
+      </ThemeProvider>
     </Provider>
   </React.StrictMode>
 );
