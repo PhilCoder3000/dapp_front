@@ -3,24 +3,26 @@ import {
   Divider,
   IconButton,
   List,
+  ListItemButton,
+  ListItemIcon,
+  ListItemText,
   styled,
   Toolbar,
 } from '@mui/material';
 import MuiDrawer from '@mui/material/Drawer';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
-import { mainListItems, secondaryListItems } from '../../constants/listItems';
+import DashboardIcon from '@mui/icons-material/Dashboard';
+import { mainListItems, secondaryListItems } from 'widgets/app/listItems';
 
-const drawerWidth: number = 240;
-
-const Drawer = styled(MuiDrawer, {
-  shouldForwardProp: (prop) => prop !== 'open',
-})(({ theme, open }) => ({
+const Drawer = styled(MuiDrawer)(({ theme, open }) => ({
   '& .MuiDrawer-paper': {
-    backgroundColor: theme.palette.background.default,
-    color: theme.palette.text.primary,
+    background: `linear-gradient(30deg, ${theme.palette.secondary.dark} 30%, ${theme.palette.primary.dark} 90%)`,
+    borderRight: `1px solid ${theme.palette.primary.main}`,
+    color: theme.palette.secondary.main,
+    fontWeight: 300,
     position: 'relative',
     whiteSpace: 'nowrap',
-    width: drawerWidth,
+    width: theme.spacing(30),
     transition: theme.transitions.create('width', {
       easing: theme.transitions.easing.sharp,
       duration: theme.transitions.duration.enteringScreen,
@@ -39,7 +41,7 @@ const Drawer = styled(MuiDrawer, {
     }),
     '& span': {
       fontWeight: 600,
-    }
+    },
   },
 }));
 
@@ -48,7 +50,7 @@ type CustomMenuProps = {
   toggleDrawer: () => void;
 };
 
-export function CustomMenu({ open, toggleDrawer }: CustomMenuProps) {
+export function Menu({ open, toggleDrawer }: CustomMenuProps) {
   return (
     <Drawer variant="permanent" open={open}>
       <Toolbar
@@ -60,14 +62,28 @@ export function CustomMenu({ open, toggleDrawer }: CustomMenuProps) {
         }}
       >
         <IconButton onClick={toggleDrawer}>
-          <ChevronLeftIcon />
+          <ChevronLeftIcon color="secondary" />
         </IconButton>
       </Toolbar>
-      <Divider />
+      <Divider color="#001f74" />
       <List component="nav">
-        {mainListItems}
-        <Divider sx={{ my: 1 }} />
-        {secondaryListItems}
+        {mainListItems.map((item) => (
+          <ListItemButton key={item}>
+            <ListItemIcon>
+              <DashboardIcon color="secondary" />
+            </ListItemIcon>
+            <ListItemText primary={item} />
+          </ListItemButton>
+        ))}
+        <Divider sx={{ my: 1 }} color="#001f74" />
+        {secondaryListItems.map((item) => (
+          <ListItemButton key={item}>
+            <ListItemIcon>
+              <DashboardIcon color="secondary" />
+            </ListItemIcon>
+            <ListItemText primary={item} />
+          </ListItemButton>
+        ))}
       </List>
     </Drawer>
   );

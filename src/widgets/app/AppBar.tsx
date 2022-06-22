@@ -7,40 +7,49 @@ import NotificationsIcon from '@mui/icons-material/Notifications';
 const drawerWidth: number = 240;
 
 interface StyledAppBarProps extends MuiAppBarProps {
-  open?: boolean;
+  open: boolean;
 }
 
-const StyledAppBar = styled(MuiAppBar, {
-  shouldForwardProp: (prop) => prop !== 'open',
-})<StyledAppBarProps>(({ theme, open }) => ({
-  backgroundColor: theme.palette.background.default,
-  color: theme.palette.text.primary,
-  zIndex: theme.zIndex.drawer + 1,
-  transition: theme.transitions.create(['width', 'margin'], {
-    easing: theme.transitions.easing.sharp,
-    duration: theme.transitions.duration.leavingScreen,
-  }),
-  ...(open && {
-    marginLeft: drawerWidth,
-    width: `calc(100% - ${drawerWidth}px)`,
+const StyledAppBar = styled(MuiAppBar)<StyledAppBarProps>(
+  ({ theme, open }) => ({
+    backgroundColor: theme.palette.primary.dark,
+    color: theme.palette.text.primary,
+    zIndex: theme.zIndex.drawer + 1,
     transition: theme.transitions.create(['width', 'margin'], {
       easing: theme.transitions.easing.sharp,
-      duration: theme.transitions.duration.enteringScreen,
+      duration: theme.transitions.duration.leavingScreen,
+    }),
+    ...(open && {
+      marginLeft: drawerWidth,
+      width: `calc(100% - ${drawerWidth}px)`,
+      transition: theme.transitions.create(['width', 'margin'], {
+        easing: theme.transitions.easing.sharp,
+        duration: theme.transitions.duration.enteringScreen,
+      }),
     }),
   }),
+);
+
+const StyledTypography = styled(Typography)(({ theme }) => ({
+  marginRight: 'auto',
+  fontSize: 30,
+  fontWeight: 700,
+  background: `linear-gradient(45deg, ${theme.palette.secondary.main} 30%, ${theme.palette.primary.light} 90%)`,
+  WebkitBackgroundClip: 'text',
+  WebkitTextFillColor: 'transparent',
 }));
 
-type CustomAppBarProps = {
+type AppBarProps = {
   open: boolean;
   toggleDrawer: () => void;
 };
 
-export function CustomAppBar({ open, toggleDrawer }: CustomAppBarProps) {
+export function AppBar({ open, toggleDrawer }: AppBarProps) {
   return (
     <StyledAppBar position="absolute" open={open} color="default">
       <Toolbar
         sx={{
-          pr: '24px', // keep right padding when drawer closed
+          pr: '24px',
         }}
       >
         <IconButton
@@ -53,24 +62,15 @@ export function CustomAppBar({ open, toggleDrawer }: CustomAppBarProps) {
             ...(open && { display: 'none' }),
           }}
         >
-          <MenuIcon />
+          <MenuIcon color="secondary" />
         </IconButton>
-        <Typography
-          component="h1"
-          variant="h6"
-          color="inherit"
-          noWrap
-          sx={{ flexGrow: 1 }}
-        >
-          Dashboard
-        </Typography>
+        <StyledTypography>Best Dapp application</StyledTypography>
         <IconButton color="inherit">
           <Badge badgeContent={4} color="secondary">
-            <NotificationsIcon />
+            <NotificationsIcon color="info" />
           </Badge>
         </IconButton>
       </Toolbar>
     </StyledAppBar>
   );
 }
-
