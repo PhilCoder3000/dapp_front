@@ -2,7 +2,7 @@ import React from 'react';
 import { Routes, Route } from 'react-router-dom';
 import { SuspenseContainer } from 'shared/suspense/SuspenseContainer';
 
-const Main = React.lazy(() => import("pages/main"));
+const Main = React.lazy(() => import("pages/send"));
 
 
 export function Routing() {

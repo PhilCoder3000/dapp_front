@@ -1,4 +1,3 @@
-import { Copyright } from '@mui/icons-material';
 import { Box, CssBaseline, Toolbar, Container as MuiContainer, styled } from '@mui/material';
 import React from 'react';
 import { AppBar } from 'widgets/app/AppBar';
@@ -12,7 +11,6 @@ const StyledBox = styled(Box)(({ theme }) => ({
   background: `linear-gradient(0deg, ${theme.palette.secondary.dark} 10%, ${theme.palette.primary.dark} 90%)`,
   color: theme.palette.text.primary,
   flexGrow: 1,
-  height: '100vh',
   overflow: 'auto',
 }))
 
@@ -22,7 +20,7 @@ export function Container({ children }: ContainerProps) {
     setOpen(!open);
   };
   return (
-    <Box sx={{ display: 'flex' }}>
+    <Box sx={{ display: 'flex', width: '100vw', height: '100vh' }}>
       <CssBaseline />
       <AppBar open={open} toggleDrawer={toggleDrawer} />
       <Menu open={open} toggleDrawer={toggleDrawer} />
@@ -30,9 +28,8 @@ export function Container({ children }: ContainerProps) {
         component="main"
       >
         <Toolbar />
-        <MuiContainer sx={{ width: '100%', height: '100%' }}>
+        <MuiContainer>
           {children}
-          <Copyright sx={{ pt: 4 }} />
         </MuiContainer>
       </StyledBox>
     </Box>

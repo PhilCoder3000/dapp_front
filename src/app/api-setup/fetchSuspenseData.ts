@@ -11,7 +11,7 @@ function wrapPromise<T>(promise: Promise<T>) {
       result = e;
     },
   );
-  const read = () => {
+  const fetch = () => {
     if (status === 'pending') {
       throw suspender;
     } else if (status === 'error') {
@@ -21,10 +21,10 @@ function wrapPromise<T>(promise: Promise<T>) {
     }
   };
   return {
-    read,
+    fetch,
   };
 }
 
-export function fetchSuspenseData<T>(promise: Promise<T>) {
+export function fetchWrapper<T>(promise: Promise<T>) {
   return wrapPromise<T>(promise);
 }

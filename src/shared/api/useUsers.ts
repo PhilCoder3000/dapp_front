@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { fetchSuspenseData } from 'shared/api/fetchSuspenseData';
+import { fetchWrapper } from 'app/api-setup/fetchSuspenseData';
 
 const prom = new Promise<Result>((resolve) => {
   setTimeout(() => {
@@ -13,9 +13,9 @@ type Result = {
   name: string;
 };
 
-const resource = fetchSuspenseData<Result>(prom);
+const resource = fetchWrapper<Result>(prom);
 
 export const useUsers = () => {
-  const [response] = useState(resource.read)
-  return response;
+  const [users] = useState(resource.fetch)
+  return users;
 };
