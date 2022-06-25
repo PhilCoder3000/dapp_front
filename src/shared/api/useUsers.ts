@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { fetchWrapper } from 'app/api-setup/fetchSuspenseData';
+import { fetchWrapper } from 'shared/api/utils/fetchWrapper'
 
 const prom = new Promise<Result>((resolve) => {
   setTimeout(() => {

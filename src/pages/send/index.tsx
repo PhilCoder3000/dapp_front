@@ -1,5 +1,5 @@
 import React from 'react';
-import { SendCard } from 'widgets/main/SendCard';
+import { SendCard } from 'widgets/send/SendCard';
 
 
 

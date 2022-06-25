@@ -1,7 +1,7 @@
 import { ThemeProvider } from '@emotion/react';
 import { theme } from 'app/styles/theme';
 import { Routing } from 'pages';
-import { store } from 'processes/store/store';
+import { store } from 'features/store';
 import React from 'react';
 import { Provider } from 'react-redux';
 import { BrowserRouter } from 'react-router-dom';

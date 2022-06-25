@@ -1,7 +1,10 @@
 import { configureStore, ThunkAction, Action } from '@reduxjs/toolkit';
+import { transactions } from 'features/store/transactions/slice';
+import { useDispatch, useSelector } from 'react-redux';
 
 export const store = configureStore({
   reducer: {
+    transactions: transactions.reducer,
   },
 });
 
@@ -13,3 +16,6 @@ export type AppThunk<ReturnType = void> = ThunkAction<
   unknown,
   Action<string>
 >;
+
+export const useAppDispatch = () => useDispatch<AppDispatch>();
+export const useAppSelector = () => useSelector<RootState, RootState>((state) => state);

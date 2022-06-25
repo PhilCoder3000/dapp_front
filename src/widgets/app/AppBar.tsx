@@ -1,8 +1,9 @@
-import React from 'react';
-import { Toolbar, IconButton, Typography, Badge, styled } from '@mui/material';
+import React, { useEffect } from 'react';
+import { Toolbar, IconButton, Typography, styled, Button } from '@mui/material';
 import MuiAppBar, { AppBarProps as MuiAppBarProps } from '@mui/material/AppBar';
 import MenuIcon from '@mui/icons-material/Menu';
-import NotificationsIcon from '@mui/icons-material/Notifications';
+import { useAppDispatch, useAppSelector } from 'features/store';
+import { checkIfConnectWallet, connectWallet } from 'shared/api/contract/connectWallet';
 
 const drawerWidth: number = 240;
 
@@ -45,6 +46,17 @@ type AppBarProps = {
 };
 
 export function AppBar({ open, toggleDrawer }: AppBarProps) {
+  const { transactions } = useAppSelector();
+  const dispatch = useAppDispatch();
+
+  const connectWalletHandler = () => {
+    if(!transactions.account) dispatch(connectWallet());
+  };
+
+  useEffect(() => {
+    if(!transactions.account) dispatch(checkIfConnectWallet());
+  }, [dispatch, transactions.account])
+
   return (
     <StyledAppBar position="absolute" open={open} color="default">
       <Toolbar
@@ -64,12 +76,17 @@ export function AppBar({ open, toggleDrawer }: AppBarProps) {
         >
           <MenuIcon color="secondary" />
         </IconButton>
-        <StyledTypography>Best Dapp application</StyledTypography>
-        <IconButton color="inherit">
-          <Badge badgeContent={4} color="secondary">
-            <NotificationsIcon color="info" />
-          </Badge>
-        </IconButton>
+        <StyledTypography>
+          Oasis - Dapp Application for everyone
+        </StyledTypography>
+        <Button variant="contained" onClick={connectWalletHandler} sx={{textTransform: 'capitalize'}}>
+          {transactions.account
+            ? `${transactions.account.slice(
+                0,
+                5,
+              )}...${transactions.account.slice(-5)}`
+            : 'Connect wallet'}
+        </Button>
       </Toolbar>
     </StyledAppBar>
   );
