@@ -5,7 +5,6 @@ import SendIcon from '@mui/icons-material/Send';
 import { FaEthereum } from 'react-icons/fa';
 import { sendTransaction } from 'shared/api/contract/sendTransaction';
 import { useAppSelector } from 'features/store';
-import { Fallback } from 'shared/suspense/Fallback';
 
 interface StBoxProps extends BoxProps {}
 
