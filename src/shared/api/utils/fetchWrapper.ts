@@ -1,12 +1,12 @@
 function wrapPromise<T>(promise: Promise<T>) {
   let status = 'pending';
-  let result: T;
+  let result: T | Error;
   let suspender = promise.then(
     (r: T) => {
       status = 'success';
       result = r;
     },
-    (e: T) => {
+    (e: Error) => {
       status = 'error';
       result = e;
     },

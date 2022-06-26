@@ -5,6 +5,7 @@ import SendIcon from '@mui/icons-material/Send';
 import { FaEthereum } from 'react-icons/fa';
 import { sendTransaction } from 'shared/api/contract/sendTransaction';
 import { useAppSelector } from 'features/store';
+import { useUsers } from 'shared/api/useUsers';
 
 interface StBoxProps extends BoxProps {}
 
@@ -52,6 +53,8 @@ export function SendCard() {
     await sendTransaction(values, transactions.account)
     setValues(initValues)
   };
+
+  useUsers()
 
   return (
     <StBox component="form" onSubmit={submitHandler}>
