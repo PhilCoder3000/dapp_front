@@ -1,5 +1,5 @@
 import { ethers } from 'ethers';
-import { getTransactionContract } from 'shared/api/contract/getContracts';
+import { getTransactionContract } from 'features/api/contract/getContracts';
 
 const { ethereum } = window;
 

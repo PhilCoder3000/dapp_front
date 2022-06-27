@@ -1,18 +1,20 @@
 import React from 'react';
 import {
-  Divider,
   IconButton,
   List,
   ListItemButton,
   ListItemIcon,
   ListItemText,
+  ListSubheader,
+  ListSubheaderProps,
   styled,
   Toolbar,
 } from '@mui/material';
 import MuiDrawer from '@mui/material/Drawer';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import DashboardIcon from '@mui/icons-material/Dashboard';
-import { mainListItems, secondaryListItems } from 'widgets/app/listItems';
+import { web2ListItems, web3ListItems } from 'widgets/app/MenuItems';
+import { useNavigate } from 'react-router-dom';
 
 const Drawer = styled(MuiDrawer)(({ theme, open }) => ({
   '& .MuiDrawer-paper': {
@@ -45,12 +47,19 @@ const Drawer = styled(MuiDrawer)(({ theme, open }) => ({
   },
 }));
 
+const StListSubhead = styled(ListSubheader)<ListSubheaderProps>(({ theme }) => ({
+  background: theme.palette.secondary.dark,
+  fontSize: '18px',
+  fontWeight: 600,
+}))
+
 type CustomMenuProps = {
   open: boolean;
   toggleDrawer: () => void;
 };
 
 export function Menu({ open, toggleDrawer }: CustomMenuProps) {
+  const navigate = useNavigate();
   return (
     <Drawer variant="permanent" open={open}>
       <Toolbar
@@ -65,18 +74,33 @@ export function Menu({ open, toggleDrawer }: CustomMenuProps) {
           <ChevronLeftIcon color="secondary" />
         </IconButton>
       </Toolbar>
-      <Divider color="#001f74" />
-      <List component="nav">
-        {mainListItems.map((item) => (
-          <ListItemButton key={item}>
+      <List
+        component="nav"
+        subheader={
+          <StListSubhead
+          >
+            Web 3.0
+          </StListSubhead>
+        }
+      >
+        {web3ListItems.map(({ label, path }) => (
+          <ListItemButton key={label} onClick={() => navigate(path)}>
             <ListItemIcon>
               <DashboardIcon color="secondary" />
             </ListItemIcon>
-            <ListItemText primary={item} />
+            <ListItemText primary={label} />
           </ListItemButton>
         ))}
-        <Divider sx={{ my: 1 }} color="#001f74" />
-        {secondaryListItems.map((item) => (
+      </List>
+      <List
+        subheader={
+          <StListSubhead
+          >
+            Web 2.0
+          </StListSubhead>
+        }
+      >
+        {web2ListItems.map((item) => (
           <ListItemButton key={item}>
             <ListItemIcon>
               <DashboardIcon color="secondary" />

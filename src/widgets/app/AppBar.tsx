@@ -3,7 +3,7 @@ import { Toolbar, IconButton, Typography, styled, Button } from '@mui/material';
 import MuiAppBar, { AppBarProps as MuiAppBarProps } from '@mui/material/AppBar';
 import MenuIcon from '@mui/icons-material/Menu';
 import { useAppDispatch, useAppSelector } from 'features/store';
-import { checkIfConnectWallet, connectWallet } from 'shared/api/contract/connectWallet';
+import { checkIfConnectWallet, connectWallet } from 'features/api/contract/connectWallet';
 
 const drawerWidth: number = 240;
 

@@ -1,11 +1,15 @@
 import { configureStore, ThunkAction, Action } from '@reduxjs/toolkit';
+import { transactionsApi } from 'features/api/transactions/api';
 import { transactions } from 'features/store/transactions/slice';
 import { useDispatch, useSelector } from 'react-redux';
 
 export const store = configureStore({
   reducer: {
     transactions: transactions.reducer,
+    [transactionsApi.reducerPath]: transactionsApi.reducer,
   },
+  middleware: (getDefaultMiddleware) =>
+  getDefaultMiddleware().concat(transactionsApi.middleware),
 });
 
 export type AppDispatch = typeof store.dispatch;

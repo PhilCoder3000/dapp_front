@@ -2,7 +2,7 @@ import { createSlice } from '@reduxjs/toolkit';
 import {
   checkIfConnectWallet,
   connectWallet,
-} from 'shared/api/contract/connectWallet';
+} from 'features/api/contract/connectWallet';
 
 interface TransactionsState {
   account: string;

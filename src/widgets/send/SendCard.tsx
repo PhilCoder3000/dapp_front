@@ -3,9 +3,8 @@ import React, { useState } from 'react';
 import { StTextField } from 'shared/ui/fields/StTextField';
 import SendIcon from '@mui/icons-material/Send';
 import { FaEthereum } from 'react-icons/fa';
-import { sendTransaction } from 'shared/api/contract/sendTransaction';
+import { sendTransaction } from 'features/api/contract/sendTransaction';
 import { useAppSelector } from 'features/store';
-import { useUsers } from 'shared/api/useUsers';
 
 interface StBoxProps extends BoxProps {}
 
@@ -54,8 +53,6 @@ export function SendCard() {
     setValues(initValues)
   };
 
-  useUsers()
-
   return (
     <StBox component="form" onSubmit={submitHandler}>
       <StFaEthereum />
@@ -93,7 +90,6 @@ export function SendCard() {
       />
       <Button
         variant="contained"
-        color="secondary"
         size="large"
         type="submit"
         endIcon={<SendIcon />}
