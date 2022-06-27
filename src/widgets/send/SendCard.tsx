@@ -3,8 +3,8 @@ import React, { useState } from 'react';
 import { StTextField } from 'shared/ui/fields/StTextField';
 import SendIcon from '@mui/icons-material/Send';
 import { FaEthereum } from 'react-icons/fa';
-import { sendTransaction } from 'features/api/contract/sendTransaction';
-import { useAppSelector } from 'features/store';
+import { sendTransaction } from 'shared/api/contract/sendTransaction';
+import { useAppSelector } from 'app/providers/store';
 
 interface StBoxProps extends BoxProps {}
 
@@ -49,7 +49,7 @@ export function SendCard() {
   
   const submitHandler = async (e: React.FormEvent<HTMLDivElement>) => {
     e.preventDefault();
-    await sendTransaction(values, transactions.account)
+    await sendTransaction(values, transactions.accountAddress)
     setValues(initValues)
   };
 

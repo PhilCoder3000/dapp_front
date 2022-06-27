@@ -1,9 +1,11 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Toolbar, IconButton, Typography, styled, Button } from '@mui/material';
 import MuiAppBar, { AppBarProps as MuiAppBarProps } from '@mui/material/AppBar';
 import MenuIcon from '@mui/icons-material/Menu';
-import { useAppDispatch, useAppSelector } from 'features/store';
-import { checkIfConnectWallet, connectWallet } from 'features/api/contract/connectWallet';
+import { useAppDispatch, useAppSelector } from 'app/providers/store';
+import { connectWallet } from 'shared/api/contract/connectWallet';
+import { setAccountAddress } from 'shared/store/transactions/slice';
+import { fetchData } from 'shared/api/fetchData';
 
 const drawerWidth: number = 240;
 
@@ -45,17 +47,24 @@ type AppBarProps = {
   toggleDrawer: () => void;
 };
 
+const resource = fetchData()
+
 export function AppBar({ open, toggleDrawer }: AppBarProps) {
   const { transactions } = useAppSelector();
+  const [accountAddress] = useState(resource.wallet.read)
   const dispatch = useAppDispatch();
+  console.log('🚀 ~ file: AppBar.tsx ~ line 56 ~ AppBar ~ res');
+  
+  useEffect(() => {
+    if (!transactions.accountAddress && accountAddress) {
+      dispatch(setAccountAddress(accountAddress))
+      console.log('🚀 ~ file: AppBar.tsx ~ line 61 ~ useEffect ~ accountAddress', accountAddress);
+    }
+  })
 
   const connectWalletHandler = () => {
-    if(!transactions.account) dispatch(connectWallet());
+    dispatch(connectWallet());
   };
-
-  useEffect(() => {
-    if(!transactions.account) dispatch(checkIfConnectWallet());
-  }, [dispatch, transactions.account])
 
   return (
     <StyledAppBar position="absolute" open={open} color="default">
@@ -79,12 +88,16 @@ export function AppBar({ open, toggleDrawer }: AppBarProps) {
         <StyledTypography>
           Oasis - Dapp Application for everyone
         </StyledTypography>
-        <Button variant="contained" onClick={connectWalletHandler} sx={{textTransform: 'capitalize'}}>
-          {transactions.account
-            ? `${transactions.account.slice(
+        <Button
+          variant="contained"
+          onClick={connectWalletHandler}
+          sx={{ textTransform: 'capitalize' }}
+        >
+          {transactions.accountAddress
+            ? `${transactions.accountAddress.slice(
                 0,
                 5,
-              )}...${transactions.account.slice(-5)}`
+              )}...${transactions.accountAddress.slice(-5)}`
             : 'Connect wallet'}
         </Button>
       </Toolbar>

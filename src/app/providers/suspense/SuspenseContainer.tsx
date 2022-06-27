@@ -1,5 +1,5 @@
 import React from 'react';
-import { Fallback } from 'shared/suspense/Fallback';
+import { Fallback } from 'app/providers/suspense/Fallback';
 
 type SuspenseContainerProps = {
   children: JSX.Element;

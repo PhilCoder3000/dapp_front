@@ -1,8 +1,8 @@
-import axios from 'axios';
+import { checkIfWalletConnected } from 'shared/api/contract/connectWallet';
 
-export function fetchData(num: number) {
+export function fetchData() {
   return {
-    todos: wrapPromise(getTodos(num)),
+    wallet: wrapPromise(checkIfWalletConnected()),
   };
 }
 
@@ -27,7 +27,3 @@ function wrapPromise<T>(promise: Promise<T>) {
     },
   };
 }
-
-
-const getTodos = (num: number) =>
-  axios.get(`https://jsonplaceholder.typicode.com/todos/${num}`);

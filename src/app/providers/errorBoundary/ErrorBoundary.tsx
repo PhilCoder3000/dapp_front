@@ -1,5 +1,5 @@
 import React from 'react';
-import { ErrorBoundaryFallback } from 'shared/errorBoundary/ErrorBoundaryFallback';
+import { ErrorBoundaryFallback } from 'app/providers/errorBoundary/ErrorBoundaryFallback';
 
 interface ContextProps {
   catchError: (error: unknown, errorMessage: string) => void;

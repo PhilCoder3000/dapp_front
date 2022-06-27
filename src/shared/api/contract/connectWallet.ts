@@ -9,12 +9,11 @@ export const connectWallet = createAsyncThunk('connectWallet', async () => {
   return accounts ? accounts[0] : 'Connect error';
 });
 
-export const checkIfConnectWallet = createAsyncThunk(
-  'checkIfConnectWallet',
-  async () => {
-      const accounts = await ethereum.request<string[]>({
-        method: 'eth_accounts',
-      });
-      return accounts ? accounts[0] : '';
-  },
-);
+export const checkIfWalletConnected = async () => {
+  console.log('🚀 ~ file: AppBar.tsx ~ line 56 ~ AppBar ~ checkIfWalletConnected');
+
+  const accounts = await ethereum.request<string[]>({
+    method: 'eth_accounts',
+  });
+  return accounts ? accounts[0] : '';
+}

@@ -1,6 +1,6 @@
 import { configureStore, ThunkAction, Action } from '@reduxjs/toolkit';
-import { transactionsApi } from 'features/api/transactions/api';
-import { transactions } from 'features/store/transactions/slice';
+import { transactionsApi } from 'shared/api/transactions/api';
+import { transactions } from 'shared/store/transactions/slice';
 import { useDispatch, useSelector } from 'react-redux';
 
 export const store = configureStore({

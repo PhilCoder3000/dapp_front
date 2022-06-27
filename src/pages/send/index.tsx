@@ -1,6 +1,6 @@
 import React from 'react';
-import ErrorBoundary from 'shared/errorBoundary/ErrorBoundary';
-import { SuspenseContainer } from 'shared/suspense/SuspenseContainer';
+import ErrorBoundary from 'app/providers/errorBoundary/ErrorBoundary';
+import { SuspenseContainer } from 'app/providers/suspense/SuspenseContainer';
 import { SendCard } from 'widgets/send/SendCard';
 
 function Main() {

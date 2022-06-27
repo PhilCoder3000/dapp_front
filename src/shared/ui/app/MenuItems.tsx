@@ -6,9 +6,6 @@ export type MenuItemType = {
 export const web3ListItems = [
   { label: 'Send', path: '/' },
   { label: 'Mint', path: '/mint' },
-  // { label: 'Customers', path: '/' },
-  // { label: 'Reports', path: '/' },
-  // { label: 'Integrations', path: '/' },
 ];
 
 export const web2ListItems = [

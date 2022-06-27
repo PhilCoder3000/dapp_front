@@ -1,25 +1,25 @@
-import React from 'react';
+import React, { Suspense } from 'react';
 import { ThemeProvider } from '@emotion/react';
-import { theme } from 'app/styles/theme';
+import { theme } from 'app/providers/styles/theme';
 import { Routing } from 'pages';
-import { store } from 'features/store';
+import { store } from 'app/providers/store';
 import { Provider } from 'react-redux';
 import { BrowserRouter } from 'react-router-dom';
-import { Container } from 'widgets/app/MainContainer';
-import { SuspenseContainer } from 'shared/suspense/SuspenseContainer';
+import { Container } from 'shared/ui/app/MainContainer';
+import { AppFallback } from 'app/providers/suspense/Fallback';
 
 export function App() {
   return (
-    <Provider store={store}>
-      <ThemeProvider theme={theme}>
-        <BrowserRouter>
-          <Container>
-            <SuspenseContainer>
+    <Suspense fallback={<AppFallback />}>
+      <Provider store={store}>
+        <ThemeProvider theme={theme}>
+          <BrowserRouter>
+            <Container>
               <Routing />
-            </SuspenseContainer>
-          </Container>
-        </BrowserRouter>
-      </ThemeProvider>
-    </Provider>
+            </Container>
+          </BrowserRouter>
+        </ThemeProvider>
+      </Provider>
+    </Suspense>
   );
 }

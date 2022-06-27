@@ -13,7 +13,7 @@ import {
 import MuiDrawer from '@mui/material/Drawer';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import DashboardIcon from '@mui/icons-material/Dashboard';
-import { web2ListItems, web3ListItems } from 'widgets/app/MenuItems';
+import { web2ListItems, web3ListItems } from 'shared/ui/app/MenuItems';
 import { useNavigate } from 'react-router-dom';
 
 const Drawer = styled(MuiDrawer)(({ theme, open }) => ({

@@ -1,7 +1,7 @@
 import { Box, CssBaseline, Toolbar, Container as MuiContainer, styled } from '@mui/material';
 import React from 'react';
-import { AppBar } from 'widgets/app/AppBar';
-import { Menu } from 'widgets/app/Menu';
+import { AppBar } from 'shared/ui/app/AppBar';
+import { Menu } from 'shared/ui/app/Menu';
 
 type ContainerProps = {
   children: JSX.Element;
