@@ -53,14 +53,13 @@ export function AppBar({ open, toggleDrawer }: AppBarProps) {
   const { transactions } = useAppSelector();
   const [accountAddress] = useState(resource.wallet.read)
   const dispatch = useAppDispatch();
-  console.log('🚀 ~ file: AppBar.tsx ~ line 56 ~ AppBar ~ res');
   
   useEffect(() => {
     if (!transactions.accountAddress && accountAddress) {
       dispatch(setAccountAddress(accountAddress))
       console.log('🚀 ~ file: AppBar.tsx ~ line 61 ~ useEffect ~ accountAddress', accountAddress);
     }
-  })
+  }, [accountAddress, dispatch, transactions.accountAddress])
 
   const connectWalletHandler = () => {
     dispatch(connectWallet());
