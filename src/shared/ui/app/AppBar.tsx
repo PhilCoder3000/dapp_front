@@ -15,7 +15,7 @@ interface StyledAppBarProps extends MuiAppBarProps {
 
 const StyledAppBar = styled(MuiAppBar)<StyledAppBarProps>(
   ({ theme, open }) => ({
-    backgroundColor: theme.palette.primary.dark,
+    background: 'transparent',
     color: theme.palette.text.primary,
     zIndex: theme.zIndex.drawer + 1,
     transition: theme.transitions.create(['width', 'margin'], {

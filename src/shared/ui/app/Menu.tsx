@@ -18,7 +18,7 @@ import { useNavigate } from 'react-router-dom';
 
 const Drawer = styled(MuiDrawer)(({ theme, open }) => ({
   '& .MuiDrawer-paper': {
-    background: `linear-gradient(30deg, ${theme.palette.secondary.dark} 30%, ${theme.palette.primary.dark} 90%)`,
+    background: 'transparent',
     borderRight: `1px solid ${theme.palette.primary.main}`,
     color: theme.palette.secondary.main,
     fontWeight: 300,

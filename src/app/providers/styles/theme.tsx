@@ -20,4 +20,13 @@ export const theme = createTheme({
       secondary: '#4e7af3',
     }
   },
+  components: {
+    MuiCssBaseline: {
+      styleOverrides: `
+        body {
+          background-color: #220b61;
+        }
+      `
+    }
+  }
 })

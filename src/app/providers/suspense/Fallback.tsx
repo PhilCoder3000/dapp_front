@@ -17,15 +17,11 @@ const StBox = styled(Box)<BoxProps>(({ theme }) => ({
   padding: '0',
   width: '100vw',
   height: '100vh',
-  display: 'flex',
-  background: '#000',
-  overflow: 'hidden',
+  background: 'linear-gradient(30deg, #020331 30%, #220b61 90%)',
 }))
 
 export function AppFallback() {
   return (
-    <StBox>
-      <CircularProgress size={200} sx={{ margin: 'auto' }} />
-    </StBox>
+    <StBox />
   )
 }
