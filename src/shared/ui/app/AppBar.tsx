@@ -6,6 +6,7 @@ import { useAppDispatch, useAppSelector } from 'app/providers/store';
 import { connectWallet } from 'shared/api/contract/connectWallet';
 import { setAccountAddress } from 'shared/store/transactions/slice';
 import { fetchData } from 'shared/api/fetchData';
+import { AuthButtons } from 'widgets/auth';
 
 const drawerWidth: number = 240;
 
@@ -50,20 +51,20 @@ type AppBarProps = {
 const resource = fetchData()
 
 export function AppBar({ open, toggleDrawer }: AppBarProps) {
-  const { transactions } = useAppSelector();
-  const [accountAddress] = useState(resource.wallet.read)
-  const dispatch = useAppDispatch();
+  // const { transactions } = useAppSelector();
+  // const [accountAddress] = useState(resource.wallet.read)
+  // const dispatch = useAppDispatch();
   
-  useEffect(() => {
-    if (!transactions.accountAddress && accountAddress) {
-      dispatch(setAccountAddress(accountAddress))
-      console.log('🚀 ~ file: AppBar.tsx ~ line 61 ~ useEffect ~ accountAddress', accountAddress);
-    }
-  }, [accountAddress, dispatch, transactions.accountAddress])
+  // useEffect(() => {
+  //   if (!transactions.accountAddress && accountAddress) {
+  //     dispatch(setAccountAddress(accountAddress))
+  //     console.log('🚀 ~ file: AppBar.tsx ~ line 61 ~ useEffect ~ accountAddress', accountAddress);
+  //   }
+  // }, [accountAddress, dispatch, transactions.accountAddress])
 
-  const connectWalletHandler = () => {
-    dispatch(connectWallet());
-  };
+  // const connectWalletHandler = () => {
+  //   dispatch(connectWallet());
+  // };
 
   return (
     <StyledAppBar position="absolute" open={open} color="default">
@@ -87,7 +88,7 @@ export function AppBar({ open, toggleDrawer }: AppBarProps) {
         <StyledTypography>
           Oasis - Dapp Application for everyone
         </StyledTypography>
-        <Button
+        {/* <Button
           variant="contained"
           onClick={connectWalletHandler}
           sx={{ textTransform: 'capitalize' }}
@@ -98,7 +99,8 @@ export function AppBar({ open, toggleDrawer }: AppBarProps) {
                 5,
               )}...${transactions.accountAddress.slice(-5)}`
             : 'Connect wallet'}
-        </Button>
+        </Button> */}
+        <AuthButtons />
       </Toolbar>
     </StyledAppBar>
   );

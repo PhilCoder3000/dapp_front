@@ -7,7 +7,7 @@ interface AnimateRoutingProps {
 
 const animations = {
   initial: { y: '100vh' },
-  animate: { y: 0, overflow: 'hidden' },
+  animate: { y: '70px', overflow: 'hidden' },
   exit: { y: '-100vh' },
 };
 
