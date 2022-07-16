@@ -10,7 +10,7 @@ export const theme = createTheme({
     secondary: {
       main: '#4e7af3',
       light: '#fff',
-      dark: '#020331'
+      dark: '#020331',
     },
     info: {
       main: '#7ac1d3',
@@ -18,7 +18,7 @@ export const theme = createTheme({
     text: {
       primary: '#4e7af3',
       secondary: '#4e7af3',
-    }
+    },
   },
   components: {
     MuiCssBaseline: {
@@ -26,7 +26,13 @@ export const theme = createTheme({
         body {
           background-color: #220b61;
         }
-      `
-    }
-  }
-})
+        ::-webkit-file-upload-button {
+          display: none;
+        }
+        ::file-selector-button {
+          display: none;
+        }
+      `,
+    },
+  },
+});

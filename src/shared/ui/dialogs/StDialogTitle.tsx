@@ -1,6 +1,6 @@
 import React from 'react';
 import IconButton from '@mui/material/IconButton';
-import { DialogTitle, Typography } from '@mui/material';
+import { DialogTitle } from '@mui/material';
 import CloseIcon from '@mui/icons-material/Close';
 
 interface StDialogTitleProps {
@@ -11,7 +11,7 @@ interface StDialogTitleProps {
 export function StDialogTitle({ title, onClose }: StDialogTitleProps) {
   return (
     <DialogTitle sx={{ m: 0, p: 2, width: '500px' }}>
-      <Typography variant="h5">{title}</Typography>
+      {title}
       <IconButton
           aria-label="close"
           onClick={onClose}

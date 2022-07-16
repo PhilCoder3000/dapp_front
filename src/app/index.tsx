@@ -6,15 +6,18 @@ import { store } from 'app/providers/store';
 import { Provider } from 'react-redux';
 import { BrowserRouter } from 'react-router-dom';
 import { Container } from 'shared/ui/app/MainContainer';
+import ErrorBoundary from 'app/providers/errorBoundary/ErrorBoundary';
 
 function App() {
   return (
     <Provider store={store}>
       <ThemeProvider theme={theme}>
         <BrowserRouter>
-          <Container>
-            <Routing />
-          </Container>
+          <ErrorBoundary>
+            <Container>
+              <Routing />
+            </Container>
+          </ErrorBoundary>
         </BrowserRouter>
       </ThemeProvider>
     </Provider>

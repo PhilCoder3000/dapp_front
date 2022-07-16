@@ -7,6 +7,7 @@ import { connectWallet } from 'shared/api/contract/connectWallet';
 import { setAccountAddress } from 'shared/store/transactions/slice';
 import { fetchData } from 'shared/api/fetchData';
 import { AuthButtons } from 'widgets/auth';
+import { StAppBarAvatar } from 'shared/ui/photo/StAppBarAvatar';
 
 const drawerWidth: number = 240;
 
@@ -100,7 +101,8 @@ export function AppBar({ open, toggleDrawer }: AppBarProps) {
               )}...${transactions.accountAddress.slice(-5)}`
             : 'Connect wallet'}
         </Button> */}
-        <AuthButtons />
+        {/* <AuthButtons /> */}
+        <StAppBarAvatar />
       </Toolbar>
     </StyledAppBar>
   );

@@ -1,6 +1,7 @@
-import ErrorBoundary from 'app/providers/errorBoundary/ErrorBoundary';
+import { ProtectedPage } from 'app/providers/protectedPage';
 import { SuspenseContainer } from 'app/providers/suspense/SuspenseContainer';
 import { AnimatePresence } from 'framer-motion';
+import { Profile } from 'pages/profile';
 import React from 'react';
 import { Routes, Route, useLocation } from 'react-router-dom';
 
@@ -12,14 +13,18 @@ export function Routing() {
   return (
     <AnimatePresence exitBeforeEnter>
       <Routes key={location.pathname} location={location}>
-        {pages.map(({ page, path }) => (
+        {pages.map(({ page, path, protectedPage }) => (
           <Route
             key={path}
             path={path}
             element={
-              <ErrorBoundary>
-                <SuspenseContainer>{page}</SuspenseContainer>
-              </ErrorBoundary>
+              <SuspenseContainer>
+                {protectedPage ? (
+                  <ProtectedPage key={path}>{page}</ProtectedPage>
+                ) : (
+                  page
+                )}
+              </SuspenseContainer>
             }
           />
         ))}
@@ -36,5 +41,10 @@ const pages = [
   {
     page: <Mint />,
     path: '/mint',
+  },
+  {
+    page: <Profile />,
+    path: '/profile',
+    protectedPage: true,
   },
 ];

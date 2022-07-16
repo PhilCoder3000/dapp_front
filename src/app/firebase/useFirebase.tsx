@@ -1,5 +1,4 @@
 import { app } from 'app/firebase';
-import { useState } from 'react';
 import {
   createUserWithEmailAndPassword,
   getAuth,
@@ -7,17 +6,18 @@ import {
 } from 'firebase/auth';
 import { useAppStore } from 'app/providers/store';
 import { setUser } from 'shared/store/auth/slice';
+import { useErrorHandling } from 'app/providers/errorBoundary/ErrorBoundary';
 
 export const useFirebase = () => {
-  const [firebaseAuth] = useState(getAuth);
   const { dispatch } = useAppStore();
-
+  const { catchError } = useErrorHandling();
   const registerWithEmailAndPassword = async (
     email: string,
     password: string,
   ) => {
     try {
-      const {user} = await createUserWithEmailAndPassword(
+      const firebaseAuth = getAuth();
+      const { user } = await createUserWithEmailAndPassword(
         firebaseAuth,
         email,
         password,
@@ -28,11 +28,14 @@ export const useFirebase = () => {
           id: user.uid,
         }),
       );
-    } catch (error) {}
+    } catch (error) {
+      catchError(error, 'firebase error');
+    }
   };
 
   const loginWithEmailAndPassword = async (email: string, password: string) => {
     try {
+      const firebaseAuth = getAuth();
       const { user } = await signInWithEmailAndPassword(
         firebaseAuth,
         email,
@@ -46,7 +49,7 @@ export const useFirebase = () => {
         }),
       );
     } catch (error) {
-      console.error(error);
+      catchError(error, 'firebase error');
     }
   };
 

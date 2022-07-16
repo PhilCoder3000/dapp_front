@@ -17,12 +17,12 @@ export function SignUp({ isOpen, onClose }: SignUpProps) {
     password: '',
   });
 
-  const { registerWithEmailAndPassword } = useFirebase()
+  const { registerWithEmailAndPassword } = useFirebase();
 
   const submitHandler = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    registerWithEmailAndPassword(values.email, values.password)
-  }
+    registerWithEmailAndPassword(values.email, values.password);
+  };
 
   return (
     <Dialog

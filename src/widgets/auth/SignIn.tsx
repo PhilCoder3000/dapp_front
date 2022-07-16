@@ -14,12 +14,12 @@ export function SignIn({ isOpen, onClose }: SignInProps) {
     password: '',
   });
 
-  const { loginWithEmailAndPassword} = useFirebase()
+  const { loginWithEmailAndPassword } = useFirebase();
 
   const submitHandler = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    loginWithEmailAndPassword(values.email, values.password)
-  }
+    loginWithEmailAndPassword(values.email, values.password);
+  };
 
   return (
     <Dialog
