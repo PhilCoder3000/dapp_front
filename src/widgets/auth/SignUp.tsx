@@ -36,15 +36,6 @@ export function SignUp({ isOpen, onClose }: SignUpProps) {
       <StDialogTitle title="SignUp" onClose={onClose} />
       <FormControl component="form" onSubmit={submitHandler} sx={{ p: 2 }}>
         <TextField
-          label="email"
-          value={values.email}
-          onChange={(e) =>
-            setValues((prev) => ({ ...prev, email: e.target.value }))
-          }
-          margin="normal"
-          required
-        />
-        <TextField
           label="first name"
           value={values.firstName}
           onChange={(e) =>
@@ -69,12 +60,22 @@ export function SignUp({ isOpen, onClose }: SignUpProps) {
           margin="normal"
         />
         <TextField
+          label="email"
+          value={values.email}
+          onChange={(e) =>
+            setValues((prev) => ({ ...prev, email: e.target.value }))
+          }
+          margin="normal"
+          required
+        />
+        <TextField
           label="password"
           value={values.password}
           onChange={(e) =>
             setValues((prev) => ({ ...prev, password: e.target.value }))
           }
           margin="normal"
+          required
         />
         <Button type="submit">SignUp</Button>
       </FormControl>

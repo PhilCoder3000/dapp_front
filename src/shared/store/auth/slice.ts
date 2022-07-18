@@ -4,6 +4,7 @@ interface IInitialState {
   email: string;
   token: string;
   id: string;
+  avatarUrl: string;
 }
 
 export const auth = createSlice({
@@ -19,8 +20,11 @@ export const auth = createSlice({
       state.email = ''
       state.token = ''
       state.id = ''
+    },
+    setAvatarUrl(state, { payload }) {
+      state.avatarUrl = payload;
     }
   },
 });
 
-export const { setUser, removeUser } = auth.actions;
+export const { setUser, removeUser, setAvatarUrl } = auth.actions;

@@ -1,9 +1,10 @@
+import React from 'react';
 import { Container } from '@mui/material';
 import { ProfileAvatar } from 'entities/prifile/ProfileAvatar';
-import React from 'react';
 import { StTextField } from 'shared/ui/fields/StTextField';
 
 export function Profile() {
+
   return (
     <Container
       sx={{

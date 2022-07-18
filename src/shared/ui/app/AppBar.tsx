@@ -101,7 +101,7 @@ export function AppBar({ open, toggleDrawer }: AppBarProps) {
               )}...${transactions.accountAddress.slice(-5)}`
             : 'Connect wallet'}
         </Button> */}
-        {/* <AuthButtons /> */}
+        <AuthButtons />
         <StAppBarAvatar />
       </Toolbar>
     </StyledAppBar>

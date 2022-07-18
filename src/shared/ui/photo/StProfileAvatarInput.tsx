@@ -3,13 +3,13 @@ import { CircularProgress, IconButton } from '@mui/material';
 import AddCircleIcon from '@mui/icons-material/AddCircle';
 
 interface StProfileAvatarInputProps {
-  setAvatar: (avatar: string) => void;
   avatar?: string;
+  uploadAvatar: (file: File) => void;
 }
 
 export function StProfileAvatarInput({
   avatar,
-  setAvatar,
+  uploadAvatar,
 }: StProfileAvatarInputProps) {
   const inputRef = useRef<HTMLInputElement>(null);
   const [isLoading, setIsLoading] = useState(false);
@@ -17,7 +17,9 @@ export function StProfileAvatarInput({
   const changeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     setIsLoading(true);
     const file = e.target.files && e.target.files[0];
-    if (file) setAvatar(URL.createObjectURL(file));
+    if (file) {
+      uploadAvatar(file);
+    }
     setTimeout(() => {
       setIsLoading(false);
     }, 100);
@@ -25,7 +27,6 @@ export function StProfileAvatarInput({
 
   const iconButtonClickHandler = () => {
     if (avatar) {
-      setAvatar('');
     } else {
       if (inputRef && inputRef.current) {
         inputRef.current.dispatchEvent(new MouseEvent('click'));
