@@ -1,10 +1,8 @@
 import { createSlice } from '@reduxjs/toolkit';
+import { UserInfo } from 'firebase/auth';
 
 interface IInitialState {
-  email: string;
-  token: string;
-  id: string;
-  avatarUrl: string;
+  user: UserInfo | undefined;
 }
 
 export const auth = createSlice({
@@ -12,18 +10,14 @@ export const auth = createSlice({
   initialState: {} as IInitialState,
   reducers: {
     setUser(state, { payload }) {
-      state.email = payload.email;
-      state.token = payload.token;
-      state.id = payload.id;
+      state.user = payload;
     },
     removeUser(state, { payload }) {
-      state.email = ''
-      state.token = ''
-      state.id = ''
+      state.user = undefined;
     },
     setAvatarUrl(state, { payload }) {
-      state.avatarUrl = payload;
-    }
+      // state.avatarUrl = payload;
+    },
   },
 });
 

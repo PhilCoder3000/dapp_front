@@ -1,11 +1,14 @@
 import { configureStore, ThunkAction, Action } from '@reduxjs/toolkit';
 import { transactionsApi } from 'shared/api/transactions/api';
 import { transactions } from 'shared/store/transactions/slice';
-import { useDispatch, useSelector } from 'react-redux';
 import { auth } from 'shared/store/auth/slice';
+import { snackbar } from 'shared/store/snackbar/slice';
+import React from 'react';
+import { Provider } from 'react-redux';
 
-export const store = configureStore({
+const store = configureStore({
   reducer: {
+    snackbar: snackbar.reducer,
     transactions: transactions.reducer,
     [transactionsApi.reducerPath]: transactionsApi.reducer,
     auth: auth.reducer,
@@ -23,7 +26,6 @@ export type AppThunk<ReturnType = void> = ThunkAction<
   Action<string>
 >;
 
-export const useAppDispatch = () => useDispatch<AppDispatch>();
-export const useAppSelector = () =>
-  useSelector<RootState, RootState>((state) => state);
-export const useAppStore = () => ({ dispatch: useAppDispatch(), state: useAppSelector()})
+export const StoreProvider = ({ children }: React.PropsWithChildren) => (
+  <Provider store={store}>{children}</Provider>
+);

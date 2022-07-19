@@ -4,7 +4,7 @@ import { StTextField } from 'shared/ui/fields/StTextField';
 import SendIcon from '@mui/icons-material/Send';
 import { FaEthereum } from 'react-icons/fa';
 import { sendTransaction } from 'shared/api/contract/sendTransaction';
-import { useAppSelector } from 'app/providers/store';
+import { useAppSelector } from 'shared/hooks/redux';
 
 interface StBoxProps extends BoxProps {}
 

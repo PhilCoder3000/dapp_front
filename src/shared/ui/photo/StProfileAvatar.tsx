@@ -3,7 +3,7 @@ import { motion } from 'framer-motion';
 import React from 'react';
 
 interface StProfileAvatarProps {
-  src?: string;
+  src?: string | null;
 }
 
 const animations = {
@@ -17,7 +17,7 @@ const Img = styled(motion.img)(({ theme }) => ({
   height: 'auto',
   border: `1px solid ${theme.palette.primary.light}`,
   borderRadius: '50%',
-  zIndex: 1
+  zIndex: 1,
 }));
 
 export function StProfileAvatar({ src }: StProfileAvatarProps) {

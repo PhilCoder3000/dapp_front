@@ -1,9 +1,10 @@
 import React, { useRef, useState } from 'react';
 import { CircularProgress, IconButton } from '@mui/material';
 import AddCircleIcon from '@mui/icons-material/AddCircle';
+import { useFirebase } from 'shared/hooks/useFirebase';
 
 interface StProfileAvatarInputProps {
-  avatar?: string;
+  avatar?: string | null;
   uploadAvatar: (file: File) => void;
 }
 
@@ -13,6 +14,7 @@ export function StProfileAvatarInput({
 }: StProfileAvatarInputProps) {
   const inputRef = useRef<HTMLInputElement>(null);
   const [isLoading, setIsLoading] = useState(false);
+  const { deleteAvatar } = useFirebase()
 
   const changeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     setIsLoading(true);
@@ -27,6 +29,7 @@ export function StProfileAvatarInput({
 
   const iconButtonClickHandler = () => {
     if (avatar) {
+      deleteAvatar()
     } else {
       if (inputRef && inputRef.current) {
         inputRef.current.dispatchEvent(new MouseEvent('click'));

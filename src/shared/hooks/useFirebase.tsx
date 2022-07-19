@@ -1,57 +1,46 @@
-import { app, firebaseAuth, storage } from 'app/firebase';
+import { firebaseAuth, storage } from 'app/firebase';
 import {
   createUserWithEmailAndPassword,
-  onAuthStateChanged,
+  getAuth,
   signInWithEmailAndPassword,
+  signOut,
   updateProfile,
-  User,
 } from 'firebase/auth';
 import { getDownloadURL, ref, uploadBytes } from 'firebase/storage';
-import { useAppStore } from 'app/providers/store';
-import { setUser } from 'shared/store/auth/slice';
 import { useErrorHandling } from 'app/providers/errorBoundary/ErrorBoundary';
-import { useEffect, useState } from 'react';
+import { useAppStore } from 'shared/hooks/redux';
+import { setIsOpenSnackbar } from 'shared/store/snackbar/slice';
 
 export const useFirebase = () => {
   const { dispatch } = useAppStore();
   const { catchError } = useErrorHandling();
-  const [currentUser, setCurrentUser] = useState<User | null>(null);
-
-  useEffect(() => {
-    const unsub = onAuthStateChanged(firebaseAuth, (user) =>
-      setCurrentUser(user),
-    );
-    return unsub;
-  }, []);
 
   const registerWithEmailAndPassword = async (
     email: string,
     password: string,
   ) => {
     try {
-      await createUserWithEmailAndPassword(
-        firebaseAuth,
-        email,
-        password,
-      );
+      await createUserWithEmailAndPassword(firebaseAuth, email, password);
     } catch (error) {
-      catchError(error, 'firebase error with registration');
+      dispatch(setIsOpenSnackbar('Registration error'));
     }
   };
 
   const loginWithEmailAndPassword = async (email: string, password: string) => {
     try {
-      await signInWithEmailAndPassword(
-        firebaseAuth,
-        email,
-        password,
+      await signInWithEmailAndPassword(firebaseAuth, email, password);
+    } catch ({ message }) {
+      dispatch(
+        setIsOpenSnackbar({
+          message: message || 'Login error',
+          severity: 'error',
+        }),
       );
-    } catch (error) {
-      catchError(error, 'firebase error with login');
     }
   };
 
   const uploadFile = async (file: Blob | Uint8Array | ArrayBuffer) => {
+    const { currentUser } = getAuth();
     try {
       if (currentUser) {
         const fileRef = ref(storage, 'avatar/' + currentUser.uid + '.jpg');
@@ -64,25 +53,40 @@ export const useFirebase = () => {
     }
   };
 
-  const downloadFile = async (
-    folder: string
-  ) => {
+  const downloadFile = async (path: string) => {
     try {
-      if (currentUser) {
-        const url = await getDownloadURL(
-          ref(storage, folder + '/' + currentUser.uid + '.jpg'),
-        );
-        return url;
-      }
+      const url = await getDownloadURL(ref(storage, path));
+      return url;
     } catch (error) {
       // catchError(error, 'firebase error with download file');
     }
   };
 
+  const logout = async () => {
+    try {
+      signOut(firebaseAuth);
+    } catch ({ message }) {
+      dispatch(
+        setIsOpenSnackbar({
+          message: message || 'Login error',
+          severity: 'error',
+        }),
+      );
+    }
+  };
+
+  const deleteAvatar = () => {
+    const { currentUser } = getAuth();
+    if (currentUser) {
+      updateProfile(currentUser, { photoURL: undefined });
+    }
+  }
+
   return {
-    app,
     registerWithEmailAndPassword,
     loginWithEmailAndPassword,
+    logout,
+    deleteAvatar,
     uploadFile,
     downloadFile,
   };

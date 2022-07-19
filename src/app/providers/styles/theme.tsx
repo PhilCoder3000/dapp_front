@@ -1,4 +1,5 @@
-import { createTheme } from '@mui/material';
+import React from 'react';
+import { createTheme, ThemeProvider as MuiThemeProvider } from '@mui/material';
 
 export const theme = createTheme({
   palette: {
@@ -36,3 +37,7 @@ export const theme = createTheme({
     },
   },
 });
+
+export const ThemeProvider = ({ children }: React.PropsWithChildren) => (
+  <MuiThemeProvider theme={theme}>{children}</MuiThemeProvider>
+);

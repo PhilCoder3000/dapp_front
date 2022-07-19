@@ -10,10 +10,6 @@ import React from 'react';
 import { AppBar } from 'shared/ui/app/AppBar';
 import { Menu } from 'shared/ui/app/Menu';
 
-type ContainerProps = {
-  children: JSX.Element;
-};
-
 const StyledBox = styled(Box)(({ theme }) => ({
   background: 'transparent',
   color: theme.palette.text.primary,
@@ -33,7 +29,7 @@ const animations = {
   exit: { opacity: 0 },
 };
 
-export function Container({ children }: ContainerProps) {
+export function StContainer({ children }: React.PropsWithChildren) {
   const [open, setOpen] = React.useState(true);
   const toggleDrawer = () => {
     setOpen(!open);

@@ -1,4 +1,5 @@
 import { Box } from '@mui/material';
+import { getRandomSvgAvatar } from 'features/getRandomSvgAvatar';
 import React from 'react';
 import { SvgAvatar, SvgAvatarIcons } from 'shared/ui/icons/SvgAvatar';
 
@@ -23,7 +24,7 @@ export function StProfileSvgAvatar({
     >
       {isShowSvg && (
         <SvgAvatar
-          icon={getRandomIcon()}
+          icon={getRandomSvgAvatar()}
           width="100%"
           height="100%"
           style={{
@@ -37,9 +38,3 @@ export function StProfileSvgAvatar({
     </Box>
   );
 }
-
-const icons = ['avocado', 'cloud', 'coffee', 'draw-love', 'sloth'];
-const getRandomIcon = () => {
-  const index = Math.floor(Math.random() * 5);
-  return icons[index] as SvgAvatarIcons;
-};

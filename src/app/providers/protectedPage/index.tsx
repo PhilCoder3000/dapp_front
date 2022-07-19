@@ -1,6 +1,6 @@
-import { useAppSelector } from 'app/providers/store';
 import React from 'react';
 import { Navigate } from 'react-router-dom';
+import { useAppSelector } from 'shared/hooks/redux';
 
 interface ProtectedPageProps {
   children: React.ReactElement
@@ -8,8 +8,8 @@ interface ProtectedPageProps {
 
 export function ProtectedPage({ children }: ProtectedPageProps) {
   const { auth } = useAppSelector()
-  // if (!auth.token) {
-  //   return <Navigate to="/" />
-  // }
+  if (!auth.user) {
+    return <Navigate to="/" />
+  }
   return children
 }

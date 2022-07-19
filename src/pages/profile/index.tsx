@@ -1,9 +1,11 @@
 import React from 'react';
-import { Container } from '@mui/material';
+import { Button, Container } from '@mui/material';
 import { ProfileAvatar } from 'entities/prifile/ProfileAvatar';
 import { StTextField } from 'shared/ui/fields/StTextField';
+import { useFirebase } from 'shared/hooks/useFirebase';
 
 export function Profile() {
+  const { logout } = useFirebase();
 
   return (
     <Container
@@ -24,6 +26,9 @@ export function Profile() {
       <StTextField value="second name" />
       <StTextField value="email" />
       <StTextField value="wallet" />
+      <Button variant="outlined" color="warning" onClick={logout}>
+        Loguot
+      </Button>
     </Container>
   );
 }

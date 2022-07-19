@@ -1,26 +1,24 @@
 import React from 'react';
-import { ThemeProvider } from '@emotion/react';
-import { theme } from 'app/providers/styles/theme';
 import { Routing } from 'pages';
-import { store } from 'app/providers/store';
-import { Provider } from 'react-redux';
+import { StoreProvider } from 'app/providers/store';
 import { BrowserRouter } from 'react-router-dom';
-import { Container } from 'shared/ui/app/MainContainer';
 import ErrorBoundary from 'app/providers/errorBoundary/ErrorBoundary';
+import { ThemeProvider } from 'app/providers/styles/theme';
+import { AppContainer } from 'widgets/appContainer';
 
 function App() {
   return (
-    <Provider store={store}>
-      <ThemeProvider theme={theme}>
+    <StoreProvider>
+      <ThemeProvider>
         <BrowserRouter>
           <ErrorBoundary>
-            <Container>
+            <AppContainer>
               <Routing />
-            </Container>
+            </AppContainer>
           </ErrorBoundary>
         </BrowserRouter>
       </ThemeProvider>
-    </Provider>
+    </StoreProvider>
   );
 }
 

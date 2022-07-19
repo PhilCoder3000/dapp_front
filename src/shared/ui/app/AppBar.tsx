@@ -2,12 +2,14 @@ import React, { useEffect, useState } from 'react';
 import { Toolbar, IconButton, Typography, styled, Button } from '@mui/material';
 import MuiAppBar, { AppBarProps as MuiAppBarProps } from '@mui/material/AppBar';
 import MenuIcon from '@mui/icons-material/Menu';
-import { useAppDispatch, useAppSelector } from 'app/providers/store';
 import { connectWallet } from 'shared/api/contract/connectWallet';
 import { setAccountAddress } from 'shared/store/transactions/slice';
 import { fetchData } from 'shared/api/fetchData';
 import { AuthButtons } from 'widgets/auth';
 import { StAppBarAvatar } from 'shared/ui/photo/StAppBarAvatar';
+import { useFirebase } from 'shared/hooks/useFirebase';
+import { AppSnackbar } from 'widgets/snackbar';
+import { useAppSelector } from 'shared/hooks/redux';
 
 const drawerWidth: number = 240;
 
@@ -49,13 +51,15 @@ type AppBarProps = {
   toggleDrawer: () => void;
 };
 
-const resource = fetchData()
+const resource = fetchData();
 
 export function AppBar({ open, toggleDrawer }: AppBarProps) {
+  const {} = useFirebase();
+  const { auth } = useAppSelector();
   // const { transactions } = useAppSelector();
   // const [accountAddress] = useState(resource.wallet.read)
   // const dispatch = useAppDispatch();
-  
+
   // useEffect(() => {
   //   if (!transactions.accountAddress && accountAddress) {
   //     dispatch(setAccountAddress(accountAddress))
@@ -68,42 +72,44 @@ export function AppBar({ open, toggleDrawer }: AppBarProps) {
   // };
 
   return (
-    <StyledAppBar position="absolute" open={open} color="default">
-      <Toolbar
-        sx={{
-          pr: '24px',
-        }}
-      >
-        <IconButton
-          edge="start"
-          color="inherit"
-          aria-label="open drawer"
-          onClick={toggleDrawer}
+    <>
+      <StyledAppBar position="absolute" open={open} color="default">
+        <Toolbar
           sx={{
-            marginRight: '36px',
-            ...(open && { display: 'none' }),
+            pr: '24px',
           }}
         >
-          <MenuIcon color="secondary" />
-        </IconButton>
-        <StyledTypography>
-          Oasis - Dapp Application for everyone
-        </StyledTypography>
-        {/* <Button
+          <IconButton
+            edge="start"
+            color="inherit"
+            aria-label="open drawer"
+            onClick={toggleDrawer}
+            sx={{
+              marginRight: '36px',
+              ...(open && { display: 'none' }),
+            }}
+          >
+            <MenuIcon color="secondary" />
+          </IconButton>
+          <StyledTypography>
+            Oasis - Dapp Application for everyone
+          </StyledTypography>
+          {/* <Button
           variant="contained"
           onClick={connectWalletHandler}
           sx={{ textTransform: 'capitalize' }}
         >
-          {transactions.accountAddress
-            ? `${transactions.accountAddress.slice(
+        {transactions.accountAddress
+          ? `${transactions.accountAddress.slice(
                 0,
                 5,
               )}...${transactions.accountAddress.slice(-5)}`
-            : 'Connect wallet'}
+              : 'Connect wallet'}
         </Button> */}
-        <AuthButtons />
-        <StAppBarAvatar />
-      </Toolbar>
-    </StyledAppBar>
+          {auth.user ? <StAppBarAvatar /> : <AuthButtons />}
+        </Toolbar>
+      </StyledAppBar>
+      <AppSnackbar />
+    </>
   );
 }
