@@ -1,6 +1,7 @@
 import { styled } from '@mui/material';
 import { motion } from 'framer-motion';
 import React from 'react';
+import { useAppSelector } from 'shared/hooks/redux';
 
 interface StProfileAvatarProps {
   src?: string | null;
@@ -21,10 +22,11 @@ const Img = styled(motion.img)(({ theme }) => ({
 }));
 
 export function StProfileAvatar({ src }: StProfileAvatarProps) {
+  const { auth } = useAppSelector()
   if (src)
     return (
       <Img
-        src={src}
+        srcSet={src + ', ' + auth.svgAvatar}
         alt="avatar"
         variants={animations}
         initial="initial"

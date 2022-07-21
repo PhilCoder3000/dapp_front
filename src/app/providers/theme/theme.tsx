@@ -33,6 +33,27 @@ export const theme = createTheme({
         ::file-selector-button {
           display: none;
         }
+        ::-webkit-scrollbar {
+          width: 12px;
+          height: 12px;
+        }
+        ::-webkit-scrollbar-track {
+          background: #2B3648;
+        }
+        ::-webkit-scrollbar-track-piece { 
+          background-color: #212936;
+        }
+        ::-webkit-scrollbar-thumb {
+          background-color: #2B3648; 
+          border-radius: 10px;
+          border: 3px solid #212936;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+          background: #313C4E;
+        }
+        ::-webkit-scrollbar-corner {
+          background: #212936;
+        }
       `,
     },
   },

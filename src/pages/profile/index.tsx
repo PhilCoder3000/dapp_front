@@ -4,7 +4,7 @@ import { ProfileAvatar } from 'entities/prifile/ProfileAvatar';
 import { StTextField } from 'shared/ui/fields/StTextField';
 import { useFirebase } from 'shared/hooks/useFirebase';
 
-export function Profile() {
+function Profile() {
   const { logout } = useFirebase();
 
   return (
@@ -32,3 +32,5 @@ export function Profile() {
     </Container>
   );
 }
+
+export default Profile

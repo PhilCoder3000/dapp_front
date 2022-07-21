@@ -1,7 +1,6 @@
 import { Box } from '@mui/material';
-import { getRandomSvgAvatar } from 'features/getRandomSvgAvatar';
 import React from 'react';
-import { SvgAvatar, SvgAvatarIcons } from 'shared/ui/icons/SvgAvatar';
+import { useAppSelector } from 'shared/hooks/redux';
 
 interface StProfileAvgAvatarProps extends React.PropsWithChildren {
   isShowSvg: boolean;
@@ -11,6 +10,8 @@ export function StProfileSvgAvatar({
   children,
   isShowSvg,
 }: StProfileAvgAvatarProps) {
+  const { auth } = useAppSelector()
+
   return (
     <Box
       sx={{
@@ -23,8 +24,13 @@ export function StProfileSvgAvatar({
       }}
     >
       {isShowSvg && (
-        <SvgAvatar
-          icon={getRandomSvgAvatar()}
+        <img
+          src={auth.svgAvatar}
+          onError={(event) => {
+            event.preventDefault(); 
+            event.currentTarget.src=auth.svgAvatar;
+          }}
+          alt="avatar"
           width="100%"
           height="100%"
           style={{

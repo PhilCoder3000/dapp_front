@@ -1,19 +1,11 @@
-import { checkIfWalletConnected } from 'shared/api/contract/connectWallet';
 
-const prom = new Promise((res, rej) => {
+export const prom = new Promise((res, rej) => {
   setTimeout(() => {
     res(10)
   }, 5000);
 })
 
-export function fetchData() {
-  return {
-    test: wrapPromise(prom),
-    wallet: wrapPromise(checkIfWalletConnected()),
-  };
-}
-
-function wrapPromise<T>(promise: Promise<T>) {
+export function wrapPromise<T>(promise: Promise<T>) {
   let status = 'pending';
   let result: T;
   let suspender = promise.then(
@@ -27,7 +19,7 @@ function wrapPromise<T>(promise: Promise<T>) {
     },
   );
   return {
-    read() {
+    fetch() {
       if (status === 'pending') {
         throw suspender;
       } else if (status === 'error') {

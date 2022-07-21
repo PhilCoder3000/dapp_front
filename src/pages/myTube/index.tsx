@@ -1,16 +1,13 @@
 import { AnimateRoutingProvider } from 'app/providers/animateRouting/AnimateRoutingProvider';
 import React from 'react';
+import { MyTubeNavBar } from 'widgets/myTube/NavBar';
 
-function Mint() {
+function MyTube() {
   return (
     <AnimateRoutingProvider>
-      <Test />
+      <MyTubeNavBar />
     </AnimateRoutingProvider>
   );
 }
 
-const Test = () => {
-  return <h1>Mint</h1>;
-};
-
-export default Mint;
+export default MyTube;

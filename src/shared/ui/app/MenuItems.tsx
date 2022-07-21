@@ -3,13 +3,3 @@ export type MenuItemType = {
   path: string;
 }
 
-export const web3ListItems = [
-  { label: 'Send', path: '/' },
-  { label: 'Mint', path: '/mint' },
-];
-
-export const web2ListItems = [
-  'Current month',
-  'Last quarter',
-  'Year-end sale',
-];

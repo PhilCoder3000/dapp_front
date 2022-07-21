@@ -6,13 +6,12 @@ import { useAppSelector } from 'shared/hooks/redux';
 
 export function StAppBarAvatar() {
   const { auth } = useAppSelector();
-  const [randomPath] = useState(getRandomSvgPath)
   
   if (!auth.user?.photoURL)
     return (
       <Avatar
       alt="Remy Sharp"
-      src={randomPath}
+      src={auth.svgAvatar}
       component={Link}
       to="/profile"
     />

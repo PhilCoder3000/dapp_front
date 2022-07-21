@@ -13,8 +13,8 @@ import {
 import MuiDrawer from '@mui/material/Drawer';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import DashboardIcon from '@mui/icons-material/Dashboard';
-import { web2ListItems, web3ListItems } from 'shared/ui/app/MenuItems';
-import { useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
+import { web3ListItems, web2ListItems } from 'pages';
 
 const Drawer = styled(MuiDrawer)(({ theme, open }) => ({
   '& .MuiDrawer-paper': {
@@ -47,11 +47,13 @@ const Drawer = styled(MuiDrawer)(({ theme, open }) => ({
   },
 }));
 
-const StListSubhead = styled(ListSubheader)<ListSubheaderProps>(({ theme }) => ({
-  background: theme.palette.secondary.dark,
-  fontSize: '18px',
-  fontWeight: 600,
-}))
+const StListSubhead = styled(ListSubheader)<ListSubheaderProps>(
+  ({ theme }) => ({
+    background: theme.palette.secondary.dark,
+    fontSize: '18px',
+    fontWeight: 600,
+  }),
+);
 
 type CustomMenuProps = {
   open: boolean;
@@ -59,7 +61,6 @@ type CustomMenuProps = {
 };
 
 export function Menu({ open, toggleDrawer }: CustomMenuProps) {
-  const navigate = useNavigate();
   return (
     <Drawer variant="permanent" open={open}>
       <Toolbar
@@ -74,17 +75,9 @@ export function Menu({ open, toggleDrawer }: CustomMenuProps) {
           <ChevronLeftIcon color="secondary" />
         </IconButton>
       </Toolbar>
-      <List
-        component="nav"
-        subheader={
-          <StListSubhead
-          >
-            Web 3.0
-          </StListSubhead>
-        }
-      >
-        {web3ListItems.map(({ label, path }) => (
-          <ListItemButton key={label} onClick={() => navigate(path)}>
+      <List subheader={<StListSubhead>Web 2.0</StListSubhead>}>
+        {web2ListItems.map(({ label, path }) => (
+          <ListItemButton key={label} component={Link} to={path}>
             <ListItemIcon>
               <DashboardIcon color="secondary" />
             </ListItemIcon>
@@ -92,20 +85,13 @@ export function Menu({ open, toggleDrawer }: CustomMenuProps) {
           </ListItemButton>
         ))}
       </List>
-      <List
-        subheader={
-          <StListSubhead
-          >
-            Web 2.0
-          </StListSubhead>
-        }
-      >
-        {web2ListItems.map((item) => (
-          <ListItemButton key={item}>
+      <List component="nav" subheader={<StListSubhead>Web 3.0</StListSubhead>}>
+        {web3ListItems.map(({ label, path }) => (
+          <ListItemButton key={label} component={Link} to={path}>
             <ListItemIcon>
               <DashboardIcon color="secondary" />
             </ListItemIcon>
-            <ListItemText primary={item} />
+            <ListItemText primary={label} />
           </ListItemButton>
         ))}
       </List>

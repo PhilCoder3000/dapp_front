@@ -1,7 +1,6 @@
 import {
   Box,
   CssBaseline,
-  Toolbar,
   Container as MuiContainer,
   styled,
 } from '@mui/material';
@@ -11,6 +10,7 @@ import { AppBar } from 'shared/ui/app/AppBar';
 import { Menu } from 'shared/ui/app/Menu';
 
 const StyledBox = styled(Box)(({ theme }) => ({
+  marginTop: '64px',
   background: 'transparent',
   color: theme.palette.text.primary,
   flexGrow: 1,
@@ -46,7 +46,6 @@ export function StContainer({ children }: React.PropsWithChildren) {
       <AppBar open={open} toggleDrawer={toggleDrawer} />
       <Menu open={open} toggleDrawer={toggleDrawer} />
       <StyledBox component="main">
-        <Toolbar />
         <MuiContainer>{children}</MuiContainer>
       </StyledBox>
     </motion.div>

@@ -4,7 +4,6 @@ import MuiAppBar, { AppBarProps as MuiAppBarProps } from '@mui/material/AppBar';
 import MenuIcon from '@mui/icons-material/Menu';
 import { connectWallet } from 'shared/api/contract/connectWallet';
 import { setAccountAddress } from 'shared/store/transactions/slice';
-import { fetchData } from 'shared/api/fetchData';
 import { AuthButtons } from 'widgets/auth';
 import { StAppBarAvatar } from 'shared/ui/photo/StAppBarAvatar';
 import { useFirebase } from 'shared/hooks/useFirebase';
@@ -50,8 +49,6 @@ type AppBarProps = {
   open: boolean;
   toggleDrawer: () => void;
 };
-
-const resource = fetchData();
 
 export function AppBar({ open, toggleDrawer }: AppBarProps) {
   const {} = useFirebase();

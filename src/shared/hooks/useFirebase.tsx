@@ -1,18 +1,25 @@
 import { firebaseAuth, storage } from 'app/firebase';
 import {
   createUserWithEmailAndPassword,
-  getAuth,
   signInWithEmailAndPassword,
   signOut,
   updateProfile,
 } from 'firebase/auth';
-import { getDownloadURL, ref, uploadBytes } from 'firebase/storage';
+import {
+  deleteObject,
+  getDownloadURL,
+  listAll,
+  ref,
+  uploadBytes,
+} from 'firebase/storage';
 import { useErrorHandling } from 'app/providers/errorBoundary/ErrorBoundary';
 import { useAppStore } from 'shared/hooks/redux';
 import { setIsOpenSnackbar } from 'shared/store/snackbar/slice';
+import { updateUser } from 'shared/store/auth/slice';
+import { getUrlFilesList } from 'shared/api/firebase';
 
 export const useFirebase = () => {
-  const { dispatch } = useAppStore();
+  const { state, dispatch } = useAppStore();
   const { catchError } = useErrorHandling();
 
   const registerWithEmailAndPassword = async (
@@ -39,14 +46,17 @@ export const useFirebase = () => {
     }
   };
 
-  const uploadFile = async (file: Blob | Uint8Array | ArrayBuffer) => {
-    const { currentUser } = getAuth();
+  const uploadFile = async (
+    file: Blob | Uint8Array | ArrayBuffer,
+    path: string,
+  ) => {
+    const { currentUser } = firebaseAuth;
     try {
       if (currentUser) {
-        const fileRef = ref(storage, 'avatar/' + currentUser.uid + '.jpg');
+        const fileRef = ref(storage, path);
         await uploadBytes(fileRef, file);
-        const photoURL = await getDownloadURL(fileRef);
-        updateProfile(currentUser, { photoURL });
+        const url = await getDownloadURL(fileRef);
+        return url;
       }
     } catch (error) {
       catchError(error, 'firebase error with upload file');
@@ -75,19 +85,50 @@ export const useFirebase = () => {
     }
   };
 
-  const deleteAvatar = () => {
-    const { currentUser } = getAuth();
-    if (currentUser) {
-      updateProfile(currentUser, { photoURL: undefined });
+  const addAvatar = async (file: Blob | Uint8Array | ArrayBuffer) => {
+    if (firebaseAuth.currentUser) {
+      const photoURL = await uploadFile(
+        file,
+        'avatar/' + firebaseAuth.currentUser.uid + '.jpg',
+      );
+      await updateProfile(firebaseAuth.currentUser, {
+        photoURL,
+        displayName: 'Jane Q. User',
+      });
+      dispatch(updateUser({ photoURL }));
     }
-  }
+  };
+
+  const deleteAvatar = async () => {
+    try {
+      if (firebaseAuth.currentUser) {
+        await deleteFile('avatar/' + firebaseAuth.currentUser.uid + '.jpg');
+        await updateProfile(firebaseAuth.currentUser, {
+          photoURL: null,
+          displayName: 'Jane Q. User',
+        });
+      }
+    } catch (error) {
+      console.log(error);
+    }
+    dispatch(updateUser({ photoURL: null }));
+  };
+
+  const deleteFile = async (path: string) => {
+    const desertRef = ref(storage, path);
+    await deleteObject(desertRef);
+  };
 
   return {
+    auth: firebaseAuth,
     registerWithEmailAndPassword,
     loginWithEmailAndPassword,
     logout,
+    deleteFile,
+    addAvatar,
     deleteAvatar,
     uploadFile,
     downloadFile,
+    getUrlFilesList,
   };
 };
