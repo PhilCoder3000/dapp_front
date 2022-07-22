@@ -6,7 +6,7 @@ import { connectWallet } from 'shared/api/contract/connectWallet';
 import { setAccountAddress } from 'shared/store/transactions/slice';
 import { AuthButtons } from 'widgets/auth';
 import { StAppBarAvatar } from 'shared/ui/photo/StAppBarAvatar';
-import { useFirebase } from 'shared/hooks/useFirebase';
+import { useFirebase } from 'shared/hooks/firebase/useFirebase';
 import { AppSnackbar } from 'widgets/snackbar';
 import { useAppSelector } from 'shared/hooks/redux';
 

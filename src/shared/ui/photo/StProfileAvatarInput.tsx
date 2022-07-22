@@ -1,7 +1,7 @@
 import React, { useRef, useState } from 'react';
 import { CircularProgress, IconButton } from '@mui/material';
 import AddCircleIcon from '@mui/icons-material/AddCircle';
-import { useFirebase } from 'shared/hooks/useFirebase';
+import { useFirebase } from 'shared/hooks/firebase/useFirebase';
 
 interface StProfileAvatarInputProps {
   avatar?: string | null;

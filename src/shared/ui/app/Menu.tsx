@@ -15,6 +15,8 @@ import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import DashboardIcon from '@mui/icons-material/Dashboard';
 import { Link } from 'react-router-dom';
 import { web3ListItems, web2ListItems } from 'pages';
+import HailIcon from '@mui/icons-material/Hail';
+import OndemandVideoIcon from '@mui/icons-material/OndemandVideo';
 
 const Drawer = styled(MuiDrawer)(({ theme, open }) => ({
   '& .MuiDrawer-paper': {
@@ -75,17 +77,23 @@ export function Menu({ open, toggleDrawer }: CustomMenuProps) {
           <ChevronLeftIcon color="secondary" />
         </IconButton>
       </Toolbar>
+      <ListItemButton component={Link} to={'/'} sx={{ maxHeight: '48px' }}>
+        <ListItemIcon>
+          <HailIcon color="secondary" />
+        </ListItemIcon>
+        <ListItemText primary="About Me" />
+      </ListItemButton>
       <List subheader={<StListSubhead>Web 2.0</StListSubhead>}>
         {web2ListItems.map(({ label, path }) => (
           <ListItemButton key={label} component={Link} to={path}>
             <ListItemIcon>
-              <DashboardIcon color="secondary" />
+              <OndemandVideoIcon color="secondary" />
             </ListItemIcon>
             <ListItemText primary={label} />
           </ListItemButton>
         ))}
       </List>
-      <List component="nav" subheader={<StListSubhead>Web 3.0</StListSubhead>}>
+      <List subheader={<StListSubhead>Web 3.0</StListSubhead>}>
         {web3ListItems.map(({ label, path }) => (
           <ListItemButton key={label} component={Link} to={path}>
             <ListItemIcon>

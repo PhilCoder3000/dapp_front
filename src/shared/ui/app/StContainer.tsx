@@ -46,7 +46,9 @@ export function StContainer({ children }: React.PropsWithChildren) {
       <AppBar open={open} toggleDrawer={toggleDrawer} />
       <Menu open={open} toggleDrawer={toggleDrawer} />
       <StyledBox component="main">
-        <MuiContainer>{children}</MuiContainer>
+        <MuiContainer sx={{ p: '30px', height: '100%', width: '100%' }}>
+          {children}
+        </MuiContainer>
       </StyledBox>
     </motion.div>
   );

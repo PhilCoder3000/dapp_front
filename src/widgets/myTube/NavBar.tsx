@@ -13,16 +13,16 @@ export function MyTubeNavBar() {
 
   return (
     <Box sx={{ width: '100%' }}>
-      <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
+      <Box sx={{ borderBottom: 1, borderColor: 'divider', mb: 4 }}>
         <Tabs
           value={value}
           onChange={handleChange}
           aria-label="basic tabs example"
           color="secondary"
         >
-          <Tab label="Item One" {...a11yPropsControls('my-tube',0)} />
-          <Tab label="Item Two" {...a11yPropsControls('my-tube',1)} />
-          <Tab label="Item Three" {...a11yPropsControls('my-tube',2)} />
+          <Tab label="Item One" {...a11yPropsControls('my-tube', 0)} />
+          <Tab label="Item Two" {...a11yPropsControls('my-tube', 1)} />
+          <Tab label="Item Three" {...a11yPropsControls('my-tube', 2)} />
         </Tabs>
       </Box>
       <MyTubeVideoTab value={value} index={0} />
@@ -58,11 +58,4 @@ function TabPanel(props: TabPanelProps) {
       )}
     </div>
   );
-}
-
-function a11yProps(index: number) {
-  return {
-    id: `simple-tab-${index}`,
-    'aria-controls': `simple-tabpanel-${index}`,
-  };
 }

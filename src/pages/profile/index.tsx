@@ -2,7 +2,7 @@ import React from 'react';
 import { Button, Container } from '@mui/material';
 import { ProfileAvatar } from 'entities/prifile/ProfileAvatar';
 import { StTextField } from 'shared/ui/fields/StTextField';
-import { useFirebase } from 'shared/hooks/useFirebase';
+import { useFirebase } from 'shared/hooks/firebase/useFirebase';
 
 function Profile() {
   const { logout } = useFirebase();

@@ -1,6 +1,9 @@
+import { AnimateRoutingProvider } from 'app/providers/animateRouting/AnimateRoutingProvider';
 import { ProtectedPage } from 'app/providers/protectedPage';
 import { SuspenseContainer } from 'app/providers/suspense/SuspenseContainer';
 import { AnimatePresence } from 'framer-motion';
+import { AboutMe } from 'pages/aboutMe';
+import { TikiTok } from 'pages/tikiTok';
 import React from 'react';
 import { Routes, Route, useLocation } from 'react-router-dom';
 
@@ -20,11 +23,13 @@ export function Routing() {
             path={path}
             element={
               <SuspenseContainer>
-                {protectedPage ? (
-                  <ProtectedPage key={path}>{page}</ProtectedPage>
-                ) : (
-                  page
-                )}
+                <AnimateRoutingProvider>
+                  {protectedPage ? (
+                    <ProtectedPage key={path}>{page}</ProtectedPage>
+                  ) : (
+                    page
+                  )}
+                </AnimateRoutingProvider>
               </SuspenseContainer>
             }
           />
@@ -39,15 +44,16 @@ type Page = {
   path: string;
   label?: string;
   protectedPage?: boolean;
-}
+};
 
 export const web3ListItems = [
-  { page: <Main />, label: 'Send', path: '/' },
+  { page: <Main />, label: 'Send', path: '/send' },
   { page: <Mint />, label: 'Mint', path: '/mint' },
 ];
 
 export const web2ListItems = [
   { page: <MyTube />, label: 'MyTube', path: '/my-tube' },
+  { page: <TikiTok />, label: 'TikiTok', path: '/tiki-tok' },
 ];
 
 const pages = [
@@ -55,6 +61,10 @@ const pages = [
     page: <Profile />,
     path: '/profile',
     protectedPage: true,
+  },
+  {
+    page: <AboutMe />,
+    path: '/',
   },
   ...web2ListItems,
   ...web3ListItems,

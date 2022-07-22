@@ -10,7 +10,7 @@ interface StBoxProps extends BoxProps {}
 
 const StBox = styled(Box)<StBoxProps>(({ theme }) => ({
   position: 'relative',
-  margin: 'auto',
+  margin: '50px auto',
   padding: '30px',
   display: 'flex',
   flexDirection: 'column',

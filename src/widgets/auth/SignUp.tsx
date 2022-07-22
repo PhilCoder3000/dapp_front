@@ -1,5 +1,5 @@
 import { Button, Dialog, FormControl, TextField } from '@mui/material';
-import { useFirebase } from 'shared/hooks/useFirebase';
+import { useFirebase } from 'shared/hooks/firebase/useFirebase';
 import React, { useState } from 'react';
 import { StDialogTitle } from 'shared/ui/dialogs/StDialogTitle';
 

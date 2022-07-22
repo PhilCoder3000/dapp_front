@@ -1,7 +1,7 @@
 import { Button, Grid, Input } from '@mui/material';
 import { a11yPropsLabelledby } from 'features/a11y/a11yTabsProps';
 import React, { useState } from 'react';
-import { useFirebase } from 'shared/hooks/useFirebase';
+import { useFirebase } from 'shared/hooks/firebase/useFirebase';
 
 interface MyTubeAddDialogProps {
   children?: React.ReactNode;

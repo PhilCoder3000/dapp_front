@@ -1,6 +1,6 @@
 import React from 'react';
 import { useAppStore } from 'shared/hooks/redux';
-import { useFirebase } from 'shared/hooks/useFirebase';
+import { useFirebase } from 'shared/hooks/firebase/useFirebase';
 import { StProfileAvatar } from 'shared/ui/photo/StProfileAvatar';
 import { StProfileAvatarInput } from 'shared/ui/photo/StProfileAvatarInput';
 import { StProfileSvgAvatar } from 'shared/ui/photo/StProfileSvgAvatar';
